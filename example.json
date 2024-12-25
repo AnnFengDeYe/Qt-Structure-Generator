@@ -1,0 +1,223 @@
+{
+    "structs": [
+        {
+            "name": "UserInfo",
+            "comment": "用户信息结构体",
+            "members": [
+                {
+                    "type": "quint32",
+                    "name": "m_userID",
+                    "comment": "用户唯一标识"
+                },
+                {
+                    "type": "char",
+                    "name": "m_username",
+                    "arraySize": 50,
+                    "comment": "用户名"
+                },
+                {
+                    "type": "char",
+                    "name": "m_email",
+                    "arraySize": 100,
+                    "comment": "用户邮箱"
+                },
+                {
+                    "type": "quint8",
+                    "name": "m_age",
+                    "comment": "用户年龄"
+                },
+                {
+                    "type": "qint16",
+                    "name": "m_status",
+                    "comment": "用户状态码"
+                }
+            ]
+        },
+        {
+            "name": "ServiceInfo",
+            "comment": "网络服务信息结构体",
+            "members": [
+                {
+                    "type": "quint32",
+                    "name": "m_serviceID",
+                    "comment": "服务唯一标识"
+                },
+                {
+                    "type": "char",
+                    "name": "m_serviceName",
+                    "arraySize": 100,
+                    "comment": "服务名称"
+                },
+                {
+                    "type": "quint8",
+                    "name": "m_priority",
+                    "comment": "服务优先级"
+                },
+                {
+                    "type": "float",
+                    "name": "m_loadFactor",
+                    "comment": "服务负载因子"
+                }
+            ]
+        },
+        {
+            "name": "Request",
+            "comment": "网络请求结构体",
+            "members": [
+                {
+                    "type": "quint32",
+                    "name": "m_requestID",
+                    "comment": "请求唯一标识"
+                },
+                {
+                    "type": "UserInfo",
+                    "name": "m_user",
+                    "comment": "发起请求的用户信息"
+                },
+                {
+                    "type": "ServiceInfo",
+                    "name": "m_service",
+                    "comment": "请求的目标服务信息"
+                },
+                {
+                    "type": "quint64",
+                    "name": "m_timestamp",
+                    "comment": "请求时间戳"
+                },
+                {
+                    "type": "char",
+                    "name": "m_payload",
+                    "arraySize": 256,
+                    "comment": "请求负载数据"
+                }
+            ]
+        },
+        {
+            "name": "Response",
+            "comment": "网络响应结构体",
+            "members": [
+                {
+                    "type": "quint32",
+                    "name": "m_responseID",
+                    "comment": "响应唯一标识"
+                },
+                {
+                    "type": "quint32",
+                    "name": "m_requestID",
+                    "comment": "对应的请求唯一标识"
+                },
+                {
+                    "type": "qint16",
+                    "name": "m_statusCode",
+                    "comment": "响应状态码"
+                },
+                {
+                    "type": "char",
+                    "name": "m_message",
+                    "arraySize": 200,
+                    "comment": "响应消息"
+                },
+                {
+                    "type": "float",
+                    "name": "m_processingTime",
+                    "comment": "处理时间（秒）"
+                }
+            ]
+        },
+        {
+            "name": "ServerStatistics",
+            "comment": "服务器统计信息结构体",
+            "members": [
+                {
+                    "type": "quint32",
+                    "name": "m_totalRequests",
+                    "comment": "总请求数"
+                },
+                {
+                    "type": "quint32",
+                    "name": "m_activeConnections",
+                    "comment": "活跃连接数"
+                },
+                {
+                    "type": "quint64",
+                    "name": "m_totalDataTransferred",
+                    "comment": "总数据传输量（字节）"
+                },
+                {
+                    "type": "float",
+                    "name": "m_cpuUsage",
+                    "comment": "CPU 使用率（%）"
+                },
+                {
+                    "type": "float",
+                    "name": "m_memoryUsage",
+                    "comment": "内存使用率（%）"
+                }
+            ]
+        },
+        {
+            "name": "ServerConfig",
+            "comment": "服务器配置结构体",
+            "members": [
+                {
+                    "type": "char",
+                    "name": "m_serverName",
+                    "arraySize": 100,
+                    "comment": "服务器名称"
+                },
+                {
+                    "type": "char",
+                    "name": "m_ipAddress",
+                    "arraySize": 16,
+                    "comment": "服务器 IP 地址"
+                },
+                {
+                    "type": "quint16",
+                    "name": "m_port",
+                    "comment": "服务器端口"
+                },
+                {
+                    "type": "quint8",
+                    "name": "m_maxConnections",
+                    "comment": "最大连接数"
+                },
+                {
+                    "type": "QVector<ServiceInfo>",
+                    "name": "m_supportedServices",
+                    "comment": "支持的服务列表"
+                }
+            ]
+        },
+        {
+            "name": "NetworkOverview",
+            "comment": "网络概览结构体",
+            "members": [
+                {
+                    "type": "ServerConfig",
+                    "name": "m_serverConfig",
+                    "comment": "服务器配置信息"
+                },
+                {
+                    "type": "ServerStatistics",
+                    "name": "m_serverStats",
+                    "comment": "服务器统计信息"
+                },
+                {
+                    "type": "quint64",
+                    "name": "m_uptime",
+                    "comment": "服务器运行时间（秒）"
+                },
+                {
+                    "type": "QVector<Request>",
+                    "name": "m_recentRequests",
+                    "comment": "最近的请求列表"
+                },
+                {
+                    "type": "QVector<Response>",
+                    "name": "m_recentResponses",
+                    "comment": "最近的响应列表"
+                }
+            ]
+        }
+    ]
+}
